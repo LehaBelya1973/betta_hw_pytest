@@ -1,14 +1,30 @@
-def sum_divisible_by_3_or_5(lst):
+def my_slice(coll, start=0, end=None):
     """
-    Функция принимает на вход список чисел и возвращает
-    сумму всех элементов списка, которые делятся на 3 или
-    5 без остатка.
+    Возвращает новый массив, содержащий копию части исходного массива.
+    :param coll: исходный список.
+    :param start: индекс, по которому начинается извлечение.
+    Если индекс отрицательный,
+    start указывает смещение от конца списка.
+    По умолчанию равен нулю.
+    :param end: индекс, по которому заканчивается извлечение
+    (не включая элемент с индексом end).
+    Если индекс отрицательный, end указывает смещение от конца списка.
+    По умолчанию равен длине исходного списка.
+    :return: массив элементов
     """
-    result = 0
-    for num in lst:
-        if num % 3 == 0 or num % 5 == 0:
-            result += num
-    return result
+    length = len(coll)
 
+    if length == 0:
+        return []
 
-print(sum_divisible_by_3_or_5([1, 3, 5]))
+    normalized_end = length if end is None else end
+
+    normalized_start = start
+
+    if normalized_start < 0:
+        if normalized_start < -length:
+            normalized_start = 0
+        else:
+            normalized_start += length
+
+    return coll[normalized_start:normalized_end]
